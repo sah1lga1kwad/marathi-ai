@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "332546023963",
+    "project_id": "marathi-ai-15122023",
+    "storage_bucket": "marathi-ai-15122023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332546023963:android:5c2d765ce5dd610adb0ebe",
+        "android_client_info": {
+          "package_name": "com.example.marathi_ai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6_kgO_9Con7Fv4oKVeVDBT6JV4v4BGSY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
