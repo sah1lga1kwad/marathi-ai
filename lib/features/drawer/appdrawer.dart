@@ -201,7 +201,13 @@ class _AppDrawerState extends State<AppDrawer> {
                     ),
                   ),
                   onPressed: signOut,
-                  child: const Text('Sign Out'),
+                  child: const Text(
+                    'Sign Out',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16
+                    ),
+                  ),
                 ),
               ],
             ),

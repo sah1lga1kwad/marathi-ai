@@ -81,43 +81,50 @@ class ChatHistoryPage extends StatelessWidget {
                           ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 2),
-                          child: ListTile(
-                            tileColor: Color.fromARGB(255, 255, 255, 255),
-                            horizontalTitleGap: 25,
-                            title: Text(
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              historyName,
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                              horizontal: 10.0, vertical: 5),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(31, 187, 187, 187),
+                              borderRadius: BorderRadius.circular(30), // Adjust the border radius as needed
                             ),
-                            subtitle: Text(
-                              formattedTimestamp,
-                              style: const TextStyle(fontSize: 12),
+                            child: ListTile(
+                              tileColor: Color.fromARGB(255, 255, 255, 255),
+                              horizontalTitleGap: 25,
+                              title: Text(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                historyName,
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Text(
+                                formattedTimestamp,
+                                style: const TextStyle(fontSize: 12),
+                              ),
+                              leading: Icon(
+                                Icons.arrow_right_sharp,
+                                color: generateRandomColor(),
+                                size: 30,
+                              ),
+                              // trailing: const Icon(Icons.output_outlined),
+                              shape: const Border(
+                                bottom: BorderSide.none
+                              ),
+                              onTap: () {
+                                // Navigate to chat page if needed
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        ChatPage(chatId: documents[index].id),
+                                  ),
+                                );
+                              },
                             ),
-                            leading: Icon(
-                              Icons.arrow_right_sharp,
-                              color: generateRandomColor(),
-                              size: 30,
-                            ),
-                            // trailing: const Icon(Icons.output_outlined),
-                            shape: const Border(
-                              bottom: BorderSide(
-                                  color: Color.fromARGB(255, 245, 245, 245),
-                                  width: 1.0),
-                            ),
-                            onTap: () {
-                              // Navigate to chat page if needed
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      ChatPage(chatId: documents[index].id),
-                                ),
-                              );
-                            },
-                          ),
+                          )
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                         if (index == documents.length - 1)
                           const ListTile(

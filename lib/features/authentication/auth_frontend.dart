@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marathi_ai/features/authentication/auth_otp/otp_ui.dart';
 import 'package:marathi_ai/features/authentication/auth_firebase.dart';
+import 'package:flutter/gestures.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key, required});
@@ -17,6 +19,7 @@ class _AuthPageState extends State<AuthPage> {
   double animatedcontainerHeight = 0.41;
   bool buttonClicked = false;
   double itemHeight2 = 0.0;
+  bool usernameEntered = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +60,7 @@ class _AuthPageState extends State<AuthPage> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: (screenHeight * 0.05)), // Top Spacer
+                    SizedBox(height: (screenHeight * 0.04)), // Top Spacer
                     // App Logo
                     AnimatedContainer(
                       duration: const Duration(seconds: 1),
@@ -65,6 +68,7 @@ class _AuthPageState extends State<AuthPage> {
                       child: (buttonClicked == false)
                           ? Image.asset(
                               'lib/features/authentication/auth_assets/marathi-ai-logo-login.png',
+                              fit: BoxFit.contain,
                             )
                           : const SizedBox(),
                     ),
@@ -88,7 +92,10 @@ class _AuthPageState extends State<AuthPage> {
                               controller: phoneNumber,
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
-                                  hintText: '+91 '),
+                                  prefixText: '+91 ',
+                                  prefixStyle: TextStyle(fontSize: 18),
+                                  labelText: '+91'
+                              ),
                               style: const TextStyle(fontSize: 18),
                             )
                           : Text(
@@ -96,7 +103,7 @@ class _AuthPageState extends State<AuthPage> {
                                 fontSize: 24,
                               ),
                               textAlign: TextAlign.left,
-                              phoneNumber.text,
+                              '+91${phoneNumber.text}',
                             ),
                     ),
                     const Spacer(),
@@ -108,7 +115,7 @@ class _AuthPageState extends State<AuthPage> {
                     ), // Name Text Field
                     // const Spacer(),
                     Otp(
-                      phone: phoneNumber.text,
+                      phone: '+91${phoneNumber.text}',
                       username: username.text,
                       width: itemWidth,
                       buttonClicked: buttonClicked,
@@ -118,13 +125,46 @@ class _AuthPageState extends State<AuthPage> {
                     SizedBox(
                       width: screenWidth * 0.7,
                       child: (buttonClicked == false)
-                          ? const Text(
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 12,
+                          ? RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.black, // Adjust text color as needed
+                          ),
+                          children: [
+                            const TextSpan(
+                              text: 'By clicking "Confirm", you agree to the ',
+                            ),
+                            TextSpan(
+                              text: 'Terms of Service',
+                              style: const TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.blue, // Adjust link color as needed
                               ),
-                              'By clicking "Confirm", you agree to the Terms of conditions and Privacy Policy')
-                          : const SizedBox(),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  launchUrl(Uri.parse('https://marathiai.com'));
+                                },
+                            ),
+                            const TextSpan(
+                              text: ' and ',
+                            ),
+                            TextSpan(
+                              text: 'Privacy Policy',
+                              style: const TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.blue, // Adjust link color as needed
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  launchUrl(Uri.parse('https://marathiai.com'));
+                                },
+                            ),
+                          ],
+                        ),
+                      )
+                          : SizedBox(),
                     ),
                     const Spacer(),
                     SizedBox(
@@ -142,7 +182,7 @@ class _AuthPageState extends State<AuthPage> {
                                           setState(
                                             () {
                                               buttonClicked = false;
-                                              animatedcontainerHeight = 0.425;
+                                              animatedcontainerHeight = 0.4;
                                               itemHeight2 = screenHeight * 0.0;
                                             },
                                           );
@@ -175,8 +215,7 @@ class _AuthPageState extends State<AuthPage> {
                                     child: ElevatedButton(
                                       onPressed: () async {
                                         if (phoneNumber.text != "") {
-                                          await verifyPhoneNumber(
-                                              phoneNumber.text);
+                                          await verifyPhoneNumber('+91${phoneNumber.text}');
                                           setState(
                                             () {
                                               buttonClicked = true;

@@ -49,18 +49,18 @@ class _Otp extends State<Otp> {
           child: (super.widget.buttonClicked)
               ? Pinput(
                   length: 6,
-                  // defaultPinTheme: PinTheme(
-                  //   height: super.widget.itemHeight2 * 0.65,
-                  //   textStyle: const TextStyle(
-                  //       fontSize: 16,
-                  //       color: Colors.black,
-                  //       fontWeight: FontWeight.w600),
-                  //   decoration: BoxDecoration(
-                  //     border: Border.all(
-                  //         color: const Color.fromARGB(255, 121, 121, 121)),
-                  //     borderRadius: BorderRadius.circular(8),
-                  //   ),
-                  // ),
+                  defaultPinTheme: PinTheme(
+                    height: super.widget.itemHeight2 * 0.55,
+                    textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 121, 121, 121)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                   androidSmsAutofillMethod:
                       AndroidSmsAutofillMethod.smsUserConsentApi,
                   listenForMultipleSmsOnAndroid: true,

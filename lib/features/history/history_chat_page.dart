@@ -86,6 +86,7 @@ class _ChatPageState extends State<ChatPage> {
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -129,7 +130,9 @@ class _ChatPageState extends State<ChatPage> {
                         fillColor: Colors.black,
                         border: OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide.none
+                        ),
                       ),
                       cursorColor: Colors.white,
                       style: const TextStyle(

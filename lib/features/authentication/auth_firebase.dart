@@ -53,6 +53,27 @@ Future<void> signInWithOTP({
   required BuildContext context,
 }) async {
   try {
+    if (username.isEmpty) {
+      // Show an error message or prompt the user to enter their username
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Please enter your username.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
       verificationId: _verificationId,
       smsCode: otp,
@@ -78,6 +99,11 @@ Future<void> signInWithOTP({
       // await docRef.collection('history').add({
       //   'history_name': '12345',`
       // });
+    } else {
+      final DocumentSnapshot userDoc = querySnapshot.docs.first;
+      await userDoc.reference.update({
+        "name": username,
+      });
     }
 
     await Navigator.pushReplacement(

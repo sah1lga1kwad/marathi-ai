@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 import 'package:marathi_ai/features/translate/translate.dart';
 import 'package:marathi_ai/features/videos/videowindow.dart';
 
@@ -82,7 +83,7 @@ class _SectionChatState extends State<SectionChat> {
                 )
               : const SearchIntro(),
         ),
-        if (loading) const LinearProgressIndicator(),
+        if (loading) const CircularProgressIndicator(),
         Card(
           margin: const EdgeInsets.all(12),
           color: Colors.black,
@@ -109,6 +110,7 @@ class _SectionChatState extends State<SectionChat> {
                         borderRadius: BorderRadius.all(
                           Radius.circular(10.0),
                         ),
+                        borderSide: BorderSide.none
                       ),
                     ),
                     cursorColor: Colors.white,
@@ -577,7 +579,7 @@ class _SectionChatState extends State<SectionChat> {
       future: translated(chats[index], index),
       builder: (context, data) {
         if (!data.hasData) {
-          return const Center(child: LinearProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
